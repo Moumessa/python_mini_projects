@@ -18,3 +18,9 @@ if answer == 'Graphical Unit Processing':
     print('Correct')
 else:
     print('Incorrect !')
+
+answer = input('What does RAM stand for ?')
+if answer == 'Random Access Memory':
+    print('Correct')
+else:
+    print('Incorrect !')
