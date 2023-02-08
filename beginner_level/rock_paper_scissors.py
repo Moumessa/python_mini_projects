@@ -17,3 +17,5 @@ while True:
     random_number = random.randint(0,2)
 
     random_choice = random.choice(choices)
+
+#------ start playing
