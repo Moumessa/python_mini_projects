@@ -10,7 +10,15 @@ def generate_password(min_length, numbers=True, special_characters=True):
     print('digits :', digits)
     print('special_chars :', special_chars)
 
-    length = min_length + random.randint(0, 10)
+
+    length_range = random.randint(0, 10)
+    length = min_length + length_range
+
+    m1 = random.randint(1,length_range)
+    m2 = random.randint(1,length_range-m1)
+    m3 = random.randint(1,length_range-m1-m2)
+
+    print(" the ms = ", m1, m2, m3)
 
     print('length :', length)
 
@@ -39,3 +47,13 @@ print(generate_password(6))
 
 
 
+def partition(number):
+    answer = set()
+    answer.add((number, ))
+    for x in range(1, number):
+        for y in partition(number - x):
+            answer.add(tuple(sorted((x, ) + y)))
+    return answer
+
+
+print(partition(10))
