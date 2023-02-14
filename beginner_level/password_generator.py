@@ -14,15 +14,28 @@ def generate_password(min_length, numbers=True, special_characters=True):
 
     print('length :', length)
 
-    if numbers :
-        if special_characters :
-            return "".join(random.sample(letters+digits+special_chars, length))
-        else:
-            return "".join(random.sample(letters+digits, length))
-    else:
-        if special_characters :
-            return "".join(random.sample(letters+special_chars, length))
-        else:
-            return "".join(random.sample(letters, length))
+    chars = letters
+
+    if numbers:
+        chars+=digits
+
+    if special_chars:
+        chars +=special_chars
+
+    return "".join(random.sample(chars, length))
+
+    # if numbers :
+    #     if special_characters :
+    #         return "".join(random.sample(letters+digits+special_chars, length))
+    #     else:
+    #         return "".join(random.sample(letters+digits, length))
+    # else:
+    #     if special_characters :
+    #         return "".join(random.sample(letters+special_chars, length))
+    #     else:
+    #         return "".join(random.sample(letters, length))
 
 print(generate_password(6))
+
+
+
