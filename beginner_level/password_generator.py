@@ -32,21 +32,24 @@ def generate_password(min_length, max_length, use_numbers=True,
     MIN_LETTERS_LENGTH = 2
 
     if use_numbers:
-        digits_length = random.randint(1,min(length-MIN_LETTERS_LENGTH, len(digits))) #1-12 => 3
+        if length-MIN_LETTERS_LENGTH >=1:
+            digits_length = random.randint(1,length-MIN_LETTERS_LENGTH)
+        else:
+            digits_length=1
     else:
         digits_length = 0
 
     print('length digits :', digits_length)
 
     if use_special_characters:
-        if length-2-digits_length >=1:
-            special_chars_length = random.randint(1,min(length-MIN_LETTERS_LENGTH-digits_length, len(special_chars))) #1-9 => 5
+        if length-MIN_LETTERS_LENGTH-digits_length >=1:
+            special_chars_length = random.randint(1,length-MIN_LETTERS_LENGTH-digits_length) 
         else:
             special_chars_length=1
     else:
         special_chars_length = 0
 
-    letters_length = length-digits_length-special_chars_length #1-6 => 3
+    letters_length = length-digits_length-special_chars_length
 
     print("lengths : letters :", letters_length,"digits:", digits_length, 'special:', special_chars_length)
 
