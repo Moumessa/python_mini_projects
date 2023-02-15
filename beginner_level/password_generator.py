@@ -1,7 +1,19 @@
 import random
 import string
 
-def generate_password(min_length, numbers=True, special_characters=True):
+def generate_password(min_length, max_length, use_numbers=True, 
+                                        use_special_characters=True):
+    """Generates random password of length between min_length and max_length.
+
+    Args:
+        min_length (int): the minimum length of the password
+        max_length (int): the maximum length of the password
+        use_numbers (bool, optional): Whether to include numbers or not. Defaults to True.
+        use_special_characters (bool, optional): Whether to include special characters or not. Defaults to True.
+
+    Returns:
+        string: the generated password
+    """
     letters = string.ascii_letters
     digits = string.digits
     special_chars = string.punctuation
@@ -24,10 +36,10 @@ def generate_password(min_length, numbers=True, special_characters=True):
 
     chars = letters
 
-    if numbers:
+    if use_numbers:
         chars+=digits
 
-    if special_chars:
+    if use_special_characters:
         chars +=special_chars
 
     return "".join(random.sample(chars, length))
