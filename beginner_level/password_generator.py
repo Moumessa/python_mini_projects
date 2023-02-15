@@ -62,9 +62,6 @@ def generate_password(min_length, max_length, use_numbers=True,
 
     password = random_letters+random_digits+random_special_chars
 
-    print("password :", password)
-    # random.shuffle(password)
-
     return ''.join(random_permutation(password))
 
 print(generate_password(5,10))
