@@ -14,6 +14,8 @@ def generate_password(min_length, max_length, use_numbers=True,
     Returns:
         string: the generated password
     """
+    assert 3<min_length<max_length
+
     letters = string.ascii_letters
     digits = string.digits
     special_chars = string.punctuation
@@ -22,27 +24,52 @@ def generate_password(min_length, max_length, use_numbers=True,
     print('digits :', digits)
     print('special_chars :', special_chars)
 
+    length = random.randint(min_length, max_length)
 
-    length_range = random.randint(0, 10)
-    length = min_length + length_range
-
-    m1 = random.randint(1,length_range)
-    m2 = random.randint(1,length_range-m1)
-    m3 = random.randint(1,length_range-m1-m2)
-
-    print(" the ms = ", m1, m2, m3)
-
-    print('length :', length)
-
-    chars = letters
+    print("length :", length)
 
     if use_numbers:
-        chars+=digits
+        digits_length = random.randint(1,length-2) #1-12 => 3
+    else:
+        digits_length = 0
 
     if use_special_characters:
-        chars +=special_chars
+        special_chars_length = random.randint(1,length-2-digits_length) #1-9 => 5
+    else:
+        special_chars_length = 0
 
-    return "".join(random.sample(chars, length))
+    letters_length = length-digits_length-special_chars_length #1-6 => 3
+
+    print("lengths : letters :", letters_length,"digits:", digits_length, 'special:', special_chars_length)
+
+    random_digits = ""
+    random_special_chars = ""
+    random_letters = "".join(random.sample(letters, letters_length))
+
+    if use_numbers:
+        random_digits= "".join(random.sample(digits, digits_length))
+
+    if use_special_characters:
+        random_special_chars="".join(random.sample(special_chars, special_chars_length))
+
+    password = random_letters+random_digits+random_special_chars
+
+    print("password : ", password)
+
+    # # print("rendom samples : letters :", random_letters,"digits:", random_digits, 'special:', random_special_chars)
+    # random.shuffle(password)
+
+    # return password
+
+    # chars = letters
+
+    # if use_numbers:
+    #     chars+=digits
+
+    # if use_special_characters:
+    #     chars +=special_chars
+
+    # return "".join(random.sample(chars, length))
 
     # if numbers :
     #     if special_characters :
@@ -55,7 +82,7 @@ def generate_password(min_length, max_length, use_numbers=True,
     #     else:
     #         return "".join(random.sample(letters, length))
 
-print(generate_password(6))
+print(generate_password(10,15))
 
 
 
@@ -68,4 +95,4 @@ def partition(number):
     return answer
 
 
-print(partition(10))
+# print(partition(10))
