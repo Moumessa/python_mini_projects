@@ -1,5 +1,6 @@
 import random
 import string
+from more_itertools import random_permutation
 
 def generate_password(min_length, max_length, use_numbers=True, 
                                         use_special_characters=True):
@@ -28,13 +29,20 @@ def generate_password(min_length, max_length, use_numbers=True,
 
     print("length :", length)
 
+    MIN_LETTERS_LENGTH = 2
+
     if use_numbers:
-        digits_length = random.randint(1,length-2) #1-12 => 3
+        digits_length = random.randint(1,min(length-MIN_LETTERS_LENGTH, len(digits))) #1-12 => 3
     else:
         digits_length = 0
 
+    print('length digits :', digits_length)
+
     if use_special_characters:
-        special_chars_length = random.randint(1,length-2-digits_length) #1-9 => 5
+        if length-2-digits_length >=1:
+            special_chars_length = random.randint(1,min(length-MIN_LETTERS_LENGTH-digits_length, len(special_chars))) #1-9 => 5
+        else:
+            special_chars_length=1
     else:
         special_chars_length = 0
 
@@ -44,55 +52,19 @@ def generate_password(min_length, max_length, use_numbers=True,
 
     random_digits = ""
     random_special_chars = ""
-    random_letters = "".join(random.sample(letters, letters_length))
+    random_letters = "".join([random.choice(letters) for _ in range(letters_length)]) # random.sample(letters, letters_length)
 
     if use_numbers:
-        random_digits= "".join(random.sample(digits, digits_length))
+        random_digits= "".join([random.choice(digits) for _ in range(digits_length)]) #random.sample(digits, digits_length))
 
     if use_special_characters:
-        random_special_chars="".join(random.sample(special_chars, special_chars_length))
+        random_special_chars="".join([random.choice(special_chars) for _ in range(special_chars_length)]) #random.sample(special_chars, special_chars_length))
 
     password = random_letters+random_digits+random_special_chars
 
-    print("password : ", password)
-
-    # # print("rendom samples : letters :", random_letters,"digits:", random_digits, 'special:', random_special_chars)
+    print("password :", password)
     # random.shuffle(password)
 
-    # return password
+    return ''.join(random_permutation(password))
 
-    # chars = letters
-
-    # if use_numbers:
-    #     chars+=digits
-
-    # if use_special_characters:
-    #     chars +=special_chars
-
-    # return "".join(random.sample(chars, length))
-
-    # if numbers :
-    #     if special_characters :
-    #         return "".join(random.sample(letters+digits+special_chars, length))
-    #     else:
-    #         return "".join(random.sample(letters+digits, length))
-    # else:
-    #     if special_characters :
-    #         return "".join(random.sample(letters+special_chars, length))
-    #     else:
-    #         return "".join(random.sample(letters, length))
-
-print(generate_password(10,15))
-
-
-
-def partition(number):
-    answer = set()
-    answer.add((number, ))
-    for x in range(1, number):
-        for y in partition(number - x):
-            answer.add(tuple(sorted((x, ) + y)))
-    return answer
-
-
-# print(partition(10))
+print(generate_password(5,10))
