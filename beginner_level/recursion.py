@@ -88,3 +88,4 @@ def recursive_list_sum(liste):
     return s
 
 print("recursive_list_sum :", recursive_list_sum([1, 2, [3,4], [5,6]]))
+print("recursive_list_sum :", recursive_list_sum([1, 2, [3,4,[7,8]], [5,6]]))
