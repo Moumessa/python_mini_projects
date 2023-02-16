@@ -64,3 +64,17 @@ def fibonacci(n):
 print(fibonacci(20))
 
 print(fibonacci_dict)
+
+# ======== Example 4 =======
+# sum recursion lists
+# Test Data: [1, 2, [3,4], [5,6]]
+# Expected Result: 21
+
+def recursive_list_sum(liste):
+
+    if len(liste)==0:
+        return 0
+    elif len(liste)==1:
+        return liste[0]
+    else:
+        return liste[0] + recursive_list_sum(liste[1:])
