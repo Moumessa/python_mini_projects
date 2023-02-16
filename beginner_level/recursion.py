@@ -71,10 +71,20 @@ print(fibonacci_dict)
 # Expected Result: 21
 
 def recursive_list_sum(liste):
+    """recusively computes the sum of all elements in possibly nested lists
 
-    if len(liste)==0:
-        return 0
-    elif len(liste)==1:
-        return liste[0]
-    else:
-        return liste[0] + recursive_list_sum(liste[1:])
+    Args:
+        liste (list): the input list of elements
+
+    Returns:
+        int: the computed sum
+    """
+    s = 0
+    for ele in liste:
+        if isinstance(ele, list):
+            s += recursive_list_sum(ele)
+        else:
+            s += ele
+    return s
+
+print("recursive_list_sum :", recursive_list_sum([1, 2, [3,4], [5,6]]))
