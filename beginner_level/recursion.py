@@ -89,3 +89,30 @@ def recursive_list_sum(liste):
 
 print("recursive_list_sum :", recursive_list_sum([1, 2, [3,4], [5,6]]))
 print("recursive_list_sum :", recursive_list_sum([1, 2, [3,4,[7,8]], [5,6]]))
+
+# ======== Example 5 =======
+# recursively compute the atoi function
+# example input   :  "12erT4-7" 
+# expected output : "1247"
+
+# example input   :  "x2gbRd-" 
+# expected output : "2"
+
+def recursive_atoi(s):
+    """recursively compute the atoi value of input string "s"
+
+    Args:
+        s (string): input string
+
+    Returns:
+        string: the atoi value of input string s
+    """
+    if len(s)==1:
+        if s.isdigit():
+            return s
+        else:
+            return ""
+    else:
+        return recursive_atoi(s[0]) + recursive_atoi(s[1:])
+    
+print('recursive_atoi :', recursive_atoi("1ab3er8"))
