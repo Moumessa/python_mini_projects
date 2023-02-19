@@ -59,3 +59,5 @@ def func(x,y):
     print("x+y=", x+y)
 
 func(3,5)
+
+#====== Example 4 ==========
